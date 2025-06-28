@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - main  # triggers when you push to main branch
+  pull_request:
+    branches:
+      - main  # triggers when you create a pull request to main branch
 
 jobs:
-  run-hello:
+  test-and-lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,5 +25,16 @@ jobs:
         run: |
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Run pytest tests
+        run: |
+          echo "Running pytest..."
+          pytest tests/
+
+      - name: Lint code
+        run: |
+          echo "Running flake8..."
+          flake8 codes/ tests/
+
       - name: Run hello.py from codes folder
-        run: python codes/hello.py
+        run: |
+          python codes/hello.py
