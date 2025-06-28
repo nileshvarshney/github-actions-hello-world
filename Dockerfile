@@ -2,7 +2,7 @@
 FROM python:3.14.0b3-alpine3.21
 
 # Update system packages to fix vulnerabilities
-RUN apt-get update && apt-get upgrade -y && apt-get clean
+# RUN apt-get update && apt-get upgrade -y && apt-get clean
 
 # Set working directory
 WORKDIR /app
